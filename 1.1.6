@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+#define INF 9999
+
+typedef struct {
+    int u, v, weight;
+} Edge;
+
+int find(int parent[], int i) {
+    if (parent[i] != i)
+        parent[i] = find(parent, parent[i]);
+    return parent[i];
+}
+
+void union1(int parent[], int rank[], int i, int j) {
+    int root_i = find(parent, i);
+    int root_j = find(parent, j);
+
+    if (rank[root_i] < rank[root_j]) {
+        parent[root_i] = root_j;
+    } else if (rank[root_i] > rank[root_j]) {
+        parent[root_j] = root_i;
+    } else {
+        parent[root_j] = root_i;
+        rank[root_i]++;
+    }
+}
+
+void kruskalMST(int **cost, int V) {
+    Edge edges[V * V];
+    int edgeCount = 0;
+
+    // Extract edges
+    for (int i = 0; i < V; i++) {
+}
